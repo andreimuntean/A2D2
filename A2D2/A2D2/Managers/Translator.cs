@@ -43,25 +43,28 @@ namespace A2D2
             var result = "";
             var start = 0;
 
-            for (var i = 0; i < message.Length; ++i)
+            if (message.Length > 0)
             {
-                if (i == message.Length - 1)
+                for (var i = 0; i < message.Length; ++i)
                 {
-                    var character = message.Substring(start, i - start);
-                    var index = machineCharacters.IndexOf(character);
-                    result += humanCharacters[index];
-                }
-                else
-                {
-                    if (message[i] == ' ')
+                    if (i == message.Length - 1)
                     {
                         var character = message.Substring(start, i - start);
                         var index = machineCharacters.IndexOf(character);
-                        result += humanCharacters[index];
+                        if (index != -1) result += humanCharacters[index];
+                        else result += '?';
+                    }
+                    else if (message[i] == ' ')
+                    {
+                        var character = message.Substring(start, i - start);
+                        var index = machineCharacters.IndexOf(character);
+                        if (index != -1) result += humanCharacters[index];
+                        else result += '?';
                         start = i + 1;
                     }
                 }
             }
+            else result = "?";
 
             return result;
         }
@@ -78,10 +81,14 @@ namespace A2D2
             foreach (var character in message)
             {
                 var index = humanCharacters.IndexOf(character);
-                result += machineCharacters[index] + " ";
+                if (index != -1) result += machineCharacters[index] + " ";
             }
 
-            return result.Substring(0, result.Length - 1);
+            if (result != "")
+            {
+                return result.Substring(0, result.Length - 1);
+            }
+            else return "";
         }
     }
 }

@@ -28,114 +28,140 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button0 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Screen));
+            this.interactionPanel = new System.Windows.Forms.GroupBox();
+            this.buttonSpeak = new System.Windows.Forms.Button();
             this.messageSent = new System.Windows.Forms.TextBox();
-            this.messageReceived = new System.Windows.Forms.TextBox();
-            this.buttonSay = new System.Windows.Forms.Button();
             this.buttonListen = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.messageReceived = new System.Windows.Forms.TextBox();
+            this.messagePanel = new System.Windows.Forms.GroupBox();
+            this.messageTextBox = new System.Windows.Forms.TextBox();
+            this.interactionPanel.SuspendLayout();
+            this.messagePanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button0
+            // interactionPanel
             // 
-            this.button0.Location = new System.Drawing.Point(368, 397);
-            this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(50, 50);
-            this.button0.TabIndex = 1;
-            this.button0.Text = "0";
-            this.button0.UseVisualStyleBackColor = true;
-            this.button0.Click += new System.EventHandler(this.button0_Click);
+            this.interactionPanel.Controls.Add(this.buttonSpeak);
+            this.interactionPanel.Controls.Add(this.messageSent);
+            this.interactionPanel.Controls.Add(this.buttonListen);
+            this.interactionPanel.Controls.Add(this.messageReceived);
+            this.interactionPanel.Location = new System.Drawing.Point(50, 49);
+            this.interactionPanel.Name = "interactionPanel";
+            this.interactionPanel.Size = new System.Drawing.Size(500, 237);
+            this.interactionPanel.TabIndex = 7;
+            this.interactionPanel.TabStop = false;
+            this.interactionPanel.Text = "Interaction Panel";
             // 
-            // button2
+            // buttonSpeak
             // 
-            this.button2.Location = new System.Drawing.Point(277, 397);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 50);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "1";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
+            this.buttonSpeak.BackColor = System.Drawing.Color.White;
+            this.buttonSpeak.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonSpeak.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonSpeak.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSpeak.Image = global::A2D2.Properties.Resources.speak;
+            this.buttonSpeak.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSpeak.Location = new System.Drawing.Point(358, 30);
+            this.buttonSpeak.Name = "buttonSpeak";
+            this.buttonSpeak.Size = new System.Drawing.Size(120, 82);
+            this.buttonSpeak.TabIndex = 5;
+            this.buttonSpeak.Text = "Speak  ";
+            this.buttonSpeak.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonSpeak.UseVisualStyleBackColor = false;
+            this.buttonSpeak.Click += new System.EventHandler(this.buttonSay_Click);
             // 
             // messageSent
             // 
-            this.messageSent.Location = new System.Drawing.Point(84, 57);
+            this.messageSent.Location = new System.Drawing.Point(22, 29);
             this.messageSent.MaxLength = 160;
             this.messageSent.Multiline = true;
             this.messageSent.Name = "messageSent";
             this.messageSent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageSent.Size = new System.Drawing.Size(470, 60);
-            this.messageSent.TabIndex = 3;
+            this.messageSent.Size = new System.Drawing.Size(330, 84);
+            this.messageSent.TabIndex = 4;
+            this.messageSent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.messageSent_KeyPress);
+            this.messageSent.KeyUp += new System.Windows.Forms.KeyEventHandler(this.messageSent_KeyUp);
+            // 
+            // buttonListen
+            // 
+            this.buttonListen.BackColor = System.Drawing.Color.White;
+            this.buttonListen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonListen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonListen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonListen.Image = ((System.Drawing.Image)(resources.GetObject("buttonListen.Image")));
+            this.buttonListen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonListen.Location = new System.Drawing.Point(358, 135);
+            this.buttonListen.Name = "buttonListen";
+            this.buttonListen.Size = new System.Drawing.Size(120, 82);
+            this.buttonListen.TabIndex = 7;
+            this.buttonListen.Text = "Listen  ";
+            this.buttonListen.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonListen.UseVisualStyleBackColor = false;
+            this.buttonListen.Click += new System.EventHandler(this.buttonListen_Click);
             // 
             // messageReceived
             // 
-            this.messageReceived.Location = new System.Drawing.Point(84, 123);
+            this.messageReceived.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.messageReceived.Location = new System.Drawing.Point(22, 134);
             this.messageReceived.MaxLength = 160;
             this.messageReceived.Multiline = true;
             this.messageReceived.Name = "messageReceived";
             this.messageReceived.ReadOnly = true;
             this.messageReceived.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageReceived.Size = new System.Drawing.Size(470, 60);
-            this.messageReceived.TabIndex = 4;
+            this.messageReceived.Size = new System.Drawing.Size(330, 84);
+            this.messageReceived.TabIndex = 6;
             // 
-            // buttonSay
+            // messagePanel
             // 
-            this.buttonSay.Location = new System.Drawing.Point(226, 220);
-            this.buttonSay.Name = "buttonSay";
-            this.buttonSay.Size = new System.Drawing.Size(150, 50);
-            this.buttonSay.TabIndex = 5;
-            this.buttonSay.Text = "Say";
-            this.buttonSay.UseVisualStyleBackColor = true;
-            this.buttonSay.Click += new System.EventHandler(this.buttonSay_Click);
+            this.messagePanel.Controls.Add(this.messageTextBox);
+            this.messagePanel.Location = new System.Drawing.Point(50, 292);
+            this.messagePanel.Name = "messagePanel";
+            this.messagePanel.Size = new System.Drawing.Size(500, 70);
+            this.messagePanel.TabIndex = 8;
+            this.messagePanel.TabStop = false;
+            this.messagePanel.Text = "Alerts";
             // 
-            // buttonListen
+            // messageTextBox
             // 
-            this.buttonListen.Location = new System.Drawing.Point(225, 276);
-            this.buttonListen.Name = "buttonListen";
-            this.buttonListen.Size = new System.Drawing.Size(150, 50);
-            this.buttonListen.TabIndex = 6;
-            this.buttonListen.Text = "Listen";
-            this.buttonListen.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(183, 397);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 50);
-            this.button1.TabIndex = 7;
-            this.button1.Text = " ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.messageTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.messageTextBox.ForeColor = System.Drawing.Color.Red;
+            this.messageTextBox.Location = new System.Drawing.Point(22, 28);
+            this.messageTextBox.Name = "messageTextBox";
+            this.messageTextBox.ReadOnly = true;
+            this.messageTextBox.Size = new System.Drawing.Size(456, 20);
+            this.messageTextBox.TabIndex = 8;
             // 
             // Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 478);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonListen);
-            this.Controls.Add(this.buttonSay);
-            this.Controls.Add(this.messageReceived);
-            this.Controls.Add(this.messageSent);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button0);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(599, 411);
+            this.Controls.Add(this.messagePanel);
+            this.Controls.Add(this.interactionPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Screen";
             this.Text = "A2D2";
+            this.interactionPanel.ResumeLayout(false);
+            this.interactionPanel.PerformLayout();
+            this.messagePanel.ResumeLayout(false);
+            this.messagePanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox messageSent;
-        private System.Windows.Forms.TextBox messageReceived;
-        private System.Windows.Forms.Button buttonSay;
+        private System.Windows.Forms.GroupBox interactionPanel;
         private System.Windows.Forms.Button buttonListen;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox messageReceived;
+        private System.Windows.Forms.GroupBox messagePanel;
+        private System.Windows.Forms.TextBox messageTextBox;
+        private System.Windows.Forms.Button buttonSpeak;
+        private System.Windows.Forms.TextBox messageSent;
+
 
     }
 }

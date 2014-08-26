@@ -6,13 +6,18 @@ namespace A2D2
 {
     static class SoundPlayer
     {
+        public static bool IsPlaying { get; private set; }
         public static int BeepDuration { get; private set; }
+        public static ushort LowPitch { get { return 5000; } }
+        public static ushort MediumPitch { get { return 11000; } }
+        public static ushort HighPitch { get { return 17000; } }
+
         private static Timer timer;
         private static string currentMessage;
 
         static SoundPlayer()
         {
-            BeepDuration = 80;
+            BeepDuration = 40;
             timer = new Timer();
             timer.Interval = BeepDuration + 5;
             timer.Tick += TimerEvent;
@@ -66,7 +71,7 @@ namespace A2D2
             }
 
             stream.Seek(0, SeekOrigin.Begin);
-            new System.Media.SoundPlayer(stream).Play();
+            new System.Media.SoundPlayer(stream).PlaySync();
             
             writer.Close();
             stream.Close();
@@ -74,20 +79,17 @@ namespace A2D2
 
         public static void PlayHighPitch()
         {
-            Beep(941);
-            Beep(1633);
+            Beep(HighPitch);
         }
 
         public static void PlayMediumPitch()
         {
-            Beep(852);
-            Beep(1336);
+            Beep(MediumPitch);
         }
 
         public static void PlayLowPitch()
         {
-            Beep(679);
-            Beep(1209);
+            Beep(LowPitch);
         }
 
         public static void Speak(char character)
@@ -102,8 +104,12 @@ namespace A2D2
 
         public static void Speak(string message)
         {
-            currentMessage = message;
-            timer.Start();
+            if (!IsPlaying)
+            {
+                IsPlaying = true;
+                currentMessage = message;
+                timer.Start();
+            }
         }
 
         #region Events
@@ -117,6 +123,7 @@ namespace A2D2
             else
             {
                 timer.Stop();
+                IsPlaying = false;
             }
         }
         #endregion

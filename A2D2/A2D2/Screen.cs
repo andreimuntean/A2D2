@@ -17,26 +17,81 @@ namespace A2D2
         {
             InitializeComponent();
         }
-        
-        private void button0_Click(object sender, EventArgs e)
+
+        private string decodeWav()
         {
-            SoundPlayer.PlayLowPitch();
+            var message = "";
+            var wav = FileManager.ReadWav(SoundRecorder.Path);
+            var frequency = SpectrumAnalyzer.GetFrequency(wav);
+
+            message = SpectrumAnalyzer.Decode(frequency);
+            message = Translator.ToHuman(message);
+
+            FileManager.Write(message, "mesaj.txt");
+            
+            return message;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void displayMessage(string message, bool isError = false)
         {
-            SoundPlayer.PlayMediumPitch();
+            if (isError) messageTextBox.ForeColor = Color.FromArgb(255, 0, 0);
+            else messageTextBox.ForeColor = Color.FromArgb(0, 0, 0);
+
+            messageTextBox.Text = message;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void resetMessages()
         {
-            SoundPlayer.PlayHighPitch();
+            messageTextBox.Text = "";
         }
 
         private void buttonSay_Click(object sender, EventArgs e)
         {
-            var yolo = Translator.ToMachine(messageSent.Text);
-            SoundPlayer.Speak(yolo);
+            if (messageTextBox.Text != "Listening ...") resetMessages();
+
+            foreach (var character in messageSent.Text)
+            {
+                if ('A' <= character && character <= 'Z') continue;
+                if ('0' <= character && character <= '9') continue;
+                if (character != ' ')
+                {
+                    displayMessage("ERROR: Only numbers, spaces and uppercase letters are permitted.", true);
+                    return;
+                }
+            }
+
+            var message = Translator.ToMachine(messageSent.Text);
+
+            SoundPlayer.Speak(message);
+        }
+
+        private void buttonListen_Click(object sender, EventArgs e)
+        {
+            resetMessages();
+
+            if (SoundRecorder.IsRecording)
+            {
+                resetMessages();
+                buttonListen.Text = "Listen  ";
+                SoundRecorder.Stop();
+                messageReceived.Text = decodeWav();
+            }
+            else
+            {
+                displayMessage("Listening ...");
+                buttonListen.Text = "Stop  ";
+                SoundRecorder.Start();
+            }
+        }
+
+        private void messageSent_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            displayMessage(messageSent.Text.Length + " / 160");
+        }
+
+        private void messageSent_KeyUp(object sender, KeyEventArgs e)
+        {
+            displayMessage(messageSent.Text.Length + " / 160");
         }
     }
 }
